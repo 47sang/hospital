@@ -27,8 +27,8 @@ public class MainController {
 
     @ApiOperation(value = "根据id查询文章")
     @GetMapping("/article/{article_id}")
-    public ResponseInfo<Article> article(@PathVariable("article_id") int article_id) {
-        ResponseInfo<Article> responseInfo = new ResponseInfo<>();
+    public ResponseInfo article(@PathVariable("article_id") int article_id) {
+        ResponseInfo responseInfo = new ResponseInfo();
         try {
             Article article = aritcleService.getArticleById(article_id);
             responseInfo.setData(article);
@@ -55,8 +55,8 @@ public class MainController {
     }
 
     @GetMapping("/hello")
-    public ResponseInfo<Article> hello() {
-        ResponseInfo<Article> responseInfo = new ResponseInfo<>();
+    public ResponseInfo hello() {
+        ResponseInfo responseInfo = new ResponseInfo();
 
         try {
             Article article = aritcleService.getArticleById(1);
@@ -70,8 +70,8 @@ public class MainController {
     }
 
     @GetMapping("/list")
-    public ResponseInfo<Article[]> list() {
-        ResponseInfo<Article[]> responseInfo = new ResponseInfo<>();
+    public ResponseInfo list() {
+        ResponseInfo responseInfo = new ResponseInfo();
         try {
             Article[] article = aritcleService.getArticles();
             responseInfo.setData(article);
@@ -84,8 +84,8 @@ public class MainController {
     }
 
     @GetMapping("/list2")
-    public ResponseInfo<Map<String, Object>> list2() {
-        ResponseInfo<Map<String, Object>> responseInfo = new ResponseInfo<>();
+    public ResponseInfo list2() {
+        ResponseInfo responseInfo = new ResponseInfo();
         try {
             Article[] article = aritcleService.getArticles();
             Map<String, Object> data = new HashMap<>();

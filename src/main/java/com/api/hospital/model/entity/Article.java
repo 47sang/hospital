@@ -4,6 +4,9 @@ import lombok.Data;
 
 @Data
 public class Article {
+    /**
+     * 健康圈文章
+     */
     private Integer article_id;
     private String article_datetime;
     private String article_title;

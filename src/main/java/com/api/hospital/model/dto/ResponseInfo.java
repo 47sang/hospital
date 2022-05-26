@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ResponseInfo<T> {
+public class ResponseInfo {
 
     private Integer code;
     private String message;
-    private T data;
+    private Object data;
 
     public ResponseInfo() {
         this.code = 200;
