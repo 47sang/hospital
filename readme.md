@@ -81,14 +81,14 @@ nav_status | 导航状态 | enum('启用','禁用') | NO   |     | NULL    |    
 字段|注释|类型(长度)|允许为空|主键|默认值|自增|
 --|--|--|--|--|--|--|
 article_id | 文章id | int(11) | NO   | PRI | NULL    | auto_increment |
-article_datetime | 发布时间 | datetime(3) | NO   |     | NULL    |             |
+article_datetime | 发布时间 | datetime(0) | NO   |     | NULL    | CURRENT_TIMESTAMP |
 article_title | 文章标题 | varchar(255) | NO   |     | NULL    |             |
 article_keywords | 文章关键词 | varchar(255) | NO   |     | NULL    |             |
 article_content | 文章内容 | mediumtext | NO   |     | NULL    |             |
 doctor_id | 作者医生id | int(11) | NO   |  FK  | NULL    |             |
-article_praise | 赞数 | int(11) | NO   |    | 0    |             |
-article_views | 阅读数 | int(11) | NO   |    | 0    |             |
-article_comments | 评论数 | int(11) | NO   |    | 0    |             |
+article_praise | 赞数 | int(11) | YES   |    | 0    |             |
+article_views | 阅读数 | int(11) | YES   |    | 0    |             |
+article_comments | 评论数 | int(11) | YES   |    | 0    |             |
 
 
 ## 健康圈文章评论表[article_comment]
@@ -97,15 +97,16 @@ article_comments | 评论数 | int(11) | NO   |    | 0    |             |
 --|--|--|--|--|--|--|
 comment_id | 评论id | int(11) | NO   | PRI | NULL    | auto_increment |
 article_id | 文章id | int(11) | NO   | FK | NULL    |  |
+patient_id | 患者id | int(11) | NO   | FK | NULL    |  |
 comment_content | 评论内容 | varchar(255) | NO   |     | NULL    |             |
-comment_datetime | 评论时间 | datetime(8) | NO   |     | NULL    |             |
+comment_datetime | 评论时间 | datetime(8) | NO   |     | NULL    | CURRENT_TIMESTAMP |
 
 ## 门诊缴费记录表[pay]
 
 字段|注释|类型(长度)|允许为空|主键|默认值|自增|
 --|--|--|--|--|--|--|
 pay_id | 缴费id | int(11) | NO   | PRI | NULL    | auto_increment |
-pay_datetime | 缴费时间 | datetime(3) | NO   |     | NULL    |             |
+pay_datetime | 缴费时间 | datetime(0) | NO   |     | NULL    |             |
 pay_money | 缴费金额 | float(11) | NO   |     | NULL    |             |
 pay_type | 缴费类型 | varchar(255) | NO   |     | NULL    |             |
 pay_status | 缴费状态 | varchar(255) | NO   |     | NULL    |             |
@@ -119,4 +120,4 @@ patient_id | 患者id | int(11) | NO   |  | NULL    |  |
 doctor_id | 医生id | int(11) | NO   |  | NULL    |  |
 department_id | 科室编号 | int(11) | NO   |  | NULL    |  |
 clinic_id | 门诊编号 | int(11) | NO   |  | NULL    |  |
-datetime | 预约时间 | datetime(3) | NO   |  | NULL    |  |
+datetime | 预约时间 | datetime(0) | NO   |  | NULL    |  |

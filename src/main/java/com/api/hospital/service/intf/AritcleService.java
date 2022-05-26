@@ -13,4 +13,6 @@ public interface AritcleService {
 
     int insertArticle(Article article);
 
+    Article[] getArticles();
+
 }

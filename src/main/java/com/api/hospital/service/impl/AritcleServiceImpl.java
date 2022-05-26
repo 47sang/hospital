@@ -15,7 +15,12 @@ public class AritcleServiceImpl implements AritcleService {
 
     @Override
     public Article getArticleById(int article_id) {
-        return articleMapper.getArticleById(article_id);
+        Article data = articleMapper.getArticleById(article_id);
+        if (data == null) {
+            throw new RuntimeException("没有找到对应的文章");
+        }else {
+            return data;
+        }
     }
 
     @Override
@@ -31,5 +36,10 @@ public class AritcleServiceImpl implements AritcleService {
     @Override
     public int insertArticle(Article article) {
         return articleMapper.insertArticle(article);
+    }
+
+    @Override
+    public Article[] getArticles() {
+        return articleMapper.getArticles();
     }
 }
