@@ -10,10 +10,9 @@ import java.util.List;
 @Data
 public class WxHome {
     private List<Nav> navs;
-    private List<Article> news;
+    private List<Article> headlines;
     private List<Article> banners;
     private List<Nav> general;
-    private List<Nav> special;
     private List<Department> departments;
     private List<Article> healthPush;
 }

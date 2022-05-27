@@ -6,6 +6,7 @@ import com.api.hospital.service.intf.AritcleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class AritcleServiceImpl implements AritcleService {
@@ -41,5 +42,15 @@ public class AritcleServiceImpl implements AritcleService {
     @Override
     public Article[] getArticles() {
         return articleMapper.getArticles();
+    }
+
+    @Override
+    public List<Article> getArticlesByTypeInStartAndEnd(String article_type, int start, int end) {
+        return articleMapper.getArticlesByTypeInStartAndEnd(article_type, start, end);
+    }
+
+    @Override
+    public List<Article> getArticlesByType(String article_type) {
+        return articleMapper.getArticlesByType(article_type);
     }
 }
