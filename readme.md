@@ -116,8 +116,8 @@ patient_id | 缴费患者id | int(11) | NO   |   FK  | NULL    |             |
 
 字段|注释|类型(长度)|允许为空|主键|默认值|自增|
 --|--|--|--|--|--|--|
-patient_id | 患者id | int(11) | NO   |  | NULL    |  |
-doctor_id | 医生id | int(11) | NO   |  | NULL    |  |
-department_id | 科室编号 | int(11) | NO   |  | NULL    |  |
-clinic_id | 门诊编号 | int(11) | NO   |  | NULL    |  |
+patient_id | 患者id | int(11) | NO   | FK | NULL    |  |
+doctor_id | 医生id | int(11) | NO   |  FK| NULL    |  |
+department_id | 科室编号 | int(11) | NO   | FK | NULL    |  |
+clinic_id | 门诊编号 | int(11) | NO   | FK | NULL    |  |
 datetime | 预约时间 | datetime(0) | NO   |  | NULL    |  |

@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 public class AritcleServiceImpl implements AritcleService {
 
     @Resource
-    ArticleMapper articleMapper;
+    private ArticleMapper articleMapper;
 
     @Override
     public Article getArticleById(int article_id) {
