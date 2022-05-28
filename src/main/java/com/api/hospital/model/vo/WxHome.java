@@ -5,10 +5,11 @@ import com.api.hospital.model.entity.Department;
 import com.api.hospital.model.entity.Nav;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class WxHome {
+public class WxHome implements Serializable {
     private List<Nav> navs;
     private List<Article> headlines;
     private List<Article> banners;

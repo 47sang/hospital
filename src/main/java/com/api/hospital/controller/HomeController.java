@@ -9,12 +9,14 @@ import com.api.hospital.service.intf.DepartmentService;
 import com.api.hospital.service.intf.NavService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Api(tags = "微信小程序接口")
 @RestController
@@ -29,23 +31,35 @@ public class HomeController {
     @Resource
     private DepartmentService departmentService;
 
+    @Resource
+    RedisTemplate<String, Object> redisTemplate;
+
     @ApiOperation(value = "首页数据")
     @GetMapping("/home")
     public ResponseInfo home() {
         ResponseInfo responseInfo = new ResponseInfo();
         WxHome wxHome = new WxHome();
-        try {
-            //填充数据
-            wxHome.setNavs(navService.findNavByType("navs"));
-            wxHome.setHeadlines(aritcleService.getArticlesByType("最头条"));
-            wxHome.setBanners(aritcleService.getArticlesByType("banner"));
-            wxHome.setGeneral(navService.findNavByType("门诊服务"));
-            wxHome.setDepartments(departmentService.findDepartmentAll());
-            wxHome.setHealthPush(aritcleService.getArticlesByPaging("健康推送", 0, 3));
+        //从redis中获取数据
+        if (redisTemplate.hasKey("home")) {
+            wxHome = (WxHome) redisTemplate.opsForValue().get("home");
             responseInfo.setData(wxHome);
-        } catch (Exception e) {
-            responseInfo.setCode(500);
-            responseInfo.setMessage(e.getMessage());
+        } else {
+            try {
+                //填充数据
+                wxHome.setNavs(navService.findNavByType("navs"));
+                wxHome.setHeadlines(aritcleService.getArticlesByType("最头条"));
+                wxHome.setBanners(aritcleService.getArticlesByType("banner"));
+                wxHome.setGeneral(navService.findNavByType("门诊服务"));
+                wxHome.setDepartments(departmentService.findDepartmentAll());
+                wxHome.setHealthPush(aritcleService.getArticlesByPaging("健康推送", 0, 3));
+                responseInfo.setData(wxHome);
+                //存入redis并设置过期时间
+                redisTemplate.opsForValue().set("home", wxHome);
+                redisTemplate.expire("postsList", 5, TimeUnit.MINUTES);
+            } catch (Exception e) {
+                responseInfo.setCode(500);
+                responseInfo.setMessage(e.getMessage());
+            }
         }
         return responseInfo;
     }

@@ -9,4 +9,5 @@ public class Clinic {
      */
     private Integer clinic_id;
     private String clinic_name;
+    private Integer department_id;
 }
