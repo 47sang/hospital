@@ -31,6 +31,9 @@ public interface NavMapper {
     @Select("select * from nav where nav_id=#{nav_id}")
     Nav findNavById(Integer nav_id);
 
+    @Select("select * from nav where nav_title=#{nav_title}")
+    Nav findNavByTitle(String nav_title);
+
     @Select("select * from nav where nav_type=#{nav_type} order by nav_sort desc")
     List<Nav> findNavByType(String nav_type);
 

@@ -6,9 +6,12 @@ import com.api.hospital.service.intf.AritcleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +21,9 @@ public class MainController {
 
     @Resource
     AritcleService aritcleService;
+
+    @Value("${file.path}")
+    private String uploadPath;
 
     @ApiOperation(value = "首页id为1的文章")
     @GetMapping("/")
@@ -100,4 +106,25 @@ public class MainController {
     }
 
 
+    @PostMapping(value = "/upload")
+    @ApiOperation(value = "文件上传")
+    public ResponseInfo upload(@RequestParam("file") MultipartFile file) {
+        ResponseInfo responseInfo = new ResponseInfo();
+        try {
+            String fileName = file.getOriginalFilename();
+            String suffixName = fileName.substring(fileName.lastIndexOf("."));
+            String path = uploadPath + fileName;
+            File dest = new File(path);
+            if (!dest.getParentFile().exists()) {
+                dest.getParentFile().mkdirs();
+            }
+            file.transferTo(dest);
+            responseInfo.setData(fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseInfo.setCode(400);
+            responseInfo.setMessage("上传失败");
+        }
+        return responseInfo;
+    }
 }

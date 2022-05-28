@@ -14,4 +14,12 @@ public class Nav {
     private String nav_url;
     private Integer nav_sort;
     private String nav_status;
+
+    public void setNav_sort() {
+        this.nav_sort = 1;
+    }
+
+    public void setNav_status() {
+        this.nav_status = "启用";
+    }
 }
