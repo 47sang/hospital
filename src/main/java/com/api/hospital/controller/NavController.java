@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -55,10 +56,15 @@ public class NavController {
 
     @ApiOperation(value = "新增导航")
     @PostMapping("")
-    public ResponseInfo newNav(Nav nav) {
+    public ResponseInfo newNav(Nav nav, @RequestParam(value = "file", required = false) MultipartFile file) {
         ResponseInfo responseInfo = new ResponseInfo();
         Map<String, Nav> data = new HashMap<>();
         try {
+            //判断是否上传了文件
+            if (file != null) {
+                String icon = navService.uploadIcon(file);
+                nav.setNav_icon(icon);
+            }
             navService.addNav(nav);
             data.put("nav", nav);
             responseInfo.setData(data);

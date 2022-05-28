@@ -3,6 +3,7 @@ package com.api.hospital.controller;
 import com.api.hospital.model.dto.ResponseInfo;
 import com.api.hospital.model.entity.Article;
 import com.api.hospital.service.intf.AritcleService;
+import com.api.hospital.service.intf.NavService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +21,9 @@ public class MainController {
 
     @Resource
     AritcleService aritcleService;
+
+    @Resource
+    NavService navService;
 
     @Value("${file.path}")
     private String uploadPath;
@@ -111,14 +114,7 @@ public class MainController {
     public ResponseInfo upload(@RequestParam("file") MultipartFile file) {
         ResponseInfo responseInfo = new ResponseInfo();
         try {
-            String fileName = file.getOriginalFilename();
-            String suffixName = fileName.substring(fileName.lastIndexOf("."));
-            String path = uploadPath + fileName;
-            File dest = new File(path);
-            if (!dest.getParentFile().exists()) {
-                dest.getParentFile().mkdirs();
-            }
-            file.transferTo(dest);
+            String fileName = navService.uploadIcon(file);
             responseInfo.setData(fileName);
         } catch (Exception e) {
             e.printStackTrace();
