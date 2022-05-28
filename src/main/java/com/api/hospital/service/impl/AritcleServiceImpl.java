@@ -12,7 +12,7 @@ import java.util.List;
 public class AritcleServiceImpl implements AritcleService {
 
     @Resource
-    private ArticleMapper articleMapper;
+    ArticleMapper articleMapper;
 
     @Override
     public Article getArticleById(int article_id) {
@@ -45,8 +45,8 @@ public class AritcleServiceImpl implements AritcleService {
     }
 
     @Override
-    public List<Article> getArticlesByTypeInStartAndEnd(String article_type, int start, int end) {
-        return articleMapper.getArticlesByTypeInStartAndEnd(article_type, start, end);
+    public List<Article> getArticlesByPaging(String article_type, int start, int end) {
+        return articleMapper.getArticlesByPaging(article_type, start, end);
     }
 
     @Override

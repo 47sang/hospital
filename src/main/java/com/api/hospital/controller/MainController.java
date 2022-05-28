@@ -15,15 +15,15 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(tags = "首页接口")
+@Api(tags = "demo接口")
 @RestController
 public class MainController {
 
     @Resource
-    AritcleService aritcleService;
+    private AritcleService aritcleService;
 
     @Resource
-    NavService navService;
+    private NavService navService;
 
     @Value("${file.path}")
     private String uploadPath;

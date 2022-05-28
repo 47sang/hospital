@@ -26,7 +26,7 @@ public interface ArticleMapper {
     Article[] getArticles();
 
     @Select("select * from article where article_type = #{article_type} order by article_id desc limit #{start},#{end}")
-    List<Article> getArticlesByTypeInStartAndEnd(String article_type, int start, int end);
+    List<Article> getArticlesByPaging(String article_type, int start, int end);
 
     @Select("select * from article where article_type = #{article_type} order by article_id desc")
     List<Article> getArticlesByType(String article_type);

@@ -22,7 +22,7 @@ import java.util.Map;
 public class NavController {
 
     @Resource
-    NavService navService;
+    private NavService navService;
 
     @ApiOperation(value = "根据id获取导航")
     @GetMapping("{nav_id}")

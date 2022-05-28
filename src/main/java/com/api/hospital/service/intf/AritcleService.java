@@ -17,7 +17,7 @@ public interface AritcleService {
 
     Article[] getArticles();
 
-    List<Article> getArticlesByTypeInStartAndEnd(String article_type, int start, int end);
+    List<Article> getArticlesByPaging(String article_type, int start, int end);
 
     List<Article> getArticlesByType(String article_type);
 

@@ -16,10 +16,10 @@ import java.util.List;
 public class NavServiceImpl implements NavService {
 
     @Resource
-    private NavMapper navMapper;
+    NavMapper navMapper;
 
     @Value("${file.path}")
-    private String uploadPath;
+    String uploadPath;
 
     @Override
     public String uploadIcon(MultipartFile file) {
