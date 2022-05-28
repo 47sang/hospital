@@ -19,7 +19,7 @@ public class NavServiceImpl implements NavService {
         if (navMapper.addNav(nav) == 1) {
             return "success";
         } else {
-            return "添加成功";
+            return "添加失败";
         }
     }
 
@@ -44,7 +44,7 @@ public class NavServiceImpl implements NavService {
     @Override
     public Nav findNavById(Integer nav_id) {
         Nav data = navMapper.findNavById(nav_id);
-        if ( data != null) {
+        if (data != null) {
             return data;
         } else {
             throw new RuntimeException("未找到对应数据");
@@ -54,7 +54,7 @@ public class NavServiceImpl implements NavService {
     @Override
     public List<Nav> findNavByType(String nav_type) {
         List<Nav> data = navMapper.findNavByType(nav_type);
-        if ( data != null) {
+        if (data.size() > 0) {
             return data;
         } else {
             throw new RuntimeException("未找到对应数据");
@@ -64,10 +64,10 @@ public class NavServiceImpl implements NavService {
     @Override
     public List<Nav> findNavAll() {
         List<Nav> data = navMapper.findNavAll();
-        if ( data != null) {
+        if (data.size() > 0) {
             return data;
         } else {
-            throw new RuntimeException("无数据");
+            throw new RuntimeException("Nav数据库中无数据");
         }
     }
 }

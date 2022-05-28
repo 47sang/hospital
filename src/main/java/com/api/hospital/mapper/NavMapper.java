@@ -16,6 +16,7 @@ public interface NavMapper {
     private Integer nav_sort;
     private enum nav_status
      */
+    @Options(useGeneratedKeys = true, keyProperty = "nav_id", keyColumn = "nav_id")
     @Insert("insert into nav(nav_title,nav_icon,nav_type,nav_url,nav_sort,nav_status) values(#{nav_title},#{nav_icon}," +
             "#{nav_type},#{nav_url},#{nav_sort},#{nav_status})")
     int addNav(Nav nav);

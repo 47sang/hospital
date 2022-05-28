@@ -30,7 +30,7 @@ public class HomeController {
         //TODO: 待完善dao层和service层
         wxHome.setHeadlines(aritcleService.getArticlesByType("最头条"));
         wxHome.setBanners(aritcleService.getArticlesByType("banner"));
-//        wxHome.setGeneral();
+        wxHome.setGeneral(navService.findNavByType("门诊服务"));
 //        wxHome.setDepartments();
         wxHome.setHealthPush(aritcleService.getArticlesByTypeInStartAndEnd("健康推送",0,3));
 

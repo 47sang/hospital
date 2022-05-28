@@ -17,6 +17,7 @@ public interface ArticleMapper {
             " article_content = #{article_content} where article_id = #{article_id}")
     int updateArticleById(Article article);
 
+    @Options(useGeneratedKeys = true, keyProperty = "article_id", keyColumn = "article_id")
     @Insert("insert into article( article_title, article_keywords, article_content, doctor_id,article_type) values(#{article_title}," +
             " #{article_keywords}, #{article_content}, #{doctor_id},#{article_type})")
     int insertArticle(Article article);
