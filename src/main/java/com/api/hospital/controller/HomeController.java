@@ -7,6 +7,7 @@ import com.api.hospital.model.vo.WxHome;
 import com.api.hospital.service.intf.AritcleService;
 import com.api.hospital.service.intf.DepartmentService;
 import com.api.hospital.service.intf.NavService;
+import com.api.hospital.utils.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -34,6 +35,9 @@ public class HomeController {
     @Resource
     RedisTemplate<String, Object> redisTemplate;
 
+    @Resource
+    RedisUtils redisUtils;
+
     @ApiOperation(value = "首页数据")
     @GetMapping("/home")
     public ResponseInfo home() {
@@ -41,7 +45,7 @@ public class HomeController {
         WxHome wxHome = new WxHome();
         //从redis中获取数据
         if (redisTemplate.hasKey("home")) {
-            wxHome = (WxHome) redisTemplate.opsForValue().get("home");
+            wxHome = (WxHome) redisUtils.get("home");
             responseInfo.setData(wxHome);
         } else {
             try {
@@ -54,8 +58,8 @@ public class HomeController {
                 wxHome.setHealthPush(aritcleService.getArticlesByPaging("健康推送", 0, 3));
                 responseInfo.setData(wxHome);
                 //存入redis并设置过期时间
-                redisTemplate.opsForValue().set("home", wxHome);
-                redisTemplate.expire("postsList", 5, TimeUnit.MINUTES);
+                redisUtils.set("home", wxHome);
+                redisTemplate.expire("home", 5, TimeUnit.MINUTES);
             } catch (Exception e) {
                 responseInfo.setCode(500);
                 responseInfo.setMessage(e.getMessage());
@@ -74,16 +78,25 @@ public class HomeController {
         } else {
             page = page * 10;
         }
-        try {
-            //填充数据
-            List<Health> data = aritcleService.getHealth(page, 10);
-            wxHealth.setHealth(data);
+        if (redisTemplate.hasKey("health" + page)) {
+            wxHealth = (WxHealth) redisUtils.get("health" + page);
             responseInfo.setData(wxHealth);
-        } catch (Exception e) {
-            responseInfo.setCode(402);
-            responseInfo.setMessage(e.getMessage());
+        } else {
+            try {
+                //填充数据
+                List<Health> data = aritcleService.getHealth(page, 10);
+                wxHealth.setHealth(data);
+                responseInfo.setData(wxHealth);
+
+                //存入redis并设置过期时间
+//                redisTemplate.opsForValue().set("health" + page, wxHealth);
+                redisUtils.set("health" + page, wxHealth);
+                redisTemplate.expire("health" + page, 5, TimeUnit.MINUTES);
+            } catch (Exception e) {
+                responseInfo.setCode(402);
+                responseInfo.setMessage(e.getMessage());
+            }
         }
         return responseInfo;
     }
-
 }
