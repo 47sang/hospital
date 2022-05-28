@@ -40,4 +40,8 @@ public interface ArticleMapper {
             "doctor on article.doctor_id = doctor.doctor_id order by article.article_id desc limit #{start},#{end}")
     List<Health> getHealth(int start, int end);
 
+    //TODO:每次访问文章详情页后，阅读数+1
+    //TODO:发表评论后，评论数+1
+    //TODO:文章点赞后，点赞数+1
+
 }
