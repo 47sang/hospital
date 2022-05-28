@@ -1,4 +1,4 @@
-package com.api.hospital.model.entity;
+package com.api.hospital.model.vo;
 
 import lombok.Data;
 

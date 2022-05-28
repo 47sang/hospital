@@ -2,7 +2,7 @@ package com.api.hospital.service.intf;
 
 
 import com.api.hospital.model.entity.Article;
-import com.api.hospital.model.entity.Health;
+import com.api.hospital.model.vo.Health;
 
 import java.util.List;
 
@@ -10,13 +10,15 @@ public interface AritcleService {
 
     Article getArticleById(int article_id);
 
-    int deleteArticleById(int article_id);
+    void deleteArticleById(int article_id);
 
-    int updateArticleById(Article article);
+    void updateArticleById(Article article);
 
-    int insertArticle(Article article);
+    void insertArticle(Article article);
 
-    Article[] getArticles();
+    List<Article> getArticles();
+
+    List<Article> getArticlesByPage(int start, int end);
 
     List<Article> getArticlesByPaging(String article_type, int start, int end);
 

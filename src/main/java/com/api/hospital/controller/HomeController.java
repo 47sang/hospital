@@ -1,7 +1,7 @@
 package com.api.hospital.controller;
 
 import com.api.hospital.model.dto.ResponseInfo;
-import com.api.hospital.model.entity.Health;
+import com.api.hospital.model.vo.Health;
 import com.api.hospital.model.vo.WxHealth;
 import com.api.hospital.model.vo.WxHome;
 import com.api.hospital.service.intf.AritcleService;
@@ -50,7 +50,7 @@ public class HomeController {
         return responseInfo;
     }
 
-    @ApiOperation(value = "健康圈数据")
+    @ApiOperation(value = "分页获取健康圈文章数据")
     @GetMapping({"/health/{page}", "/health"})
     public ResponseInfo health(@PathVariable(value = "page", required = false) Integer page) {
         ResponseInfo responseInfo = new ResponseInfo();

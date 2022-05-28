@@ -30,20 +30,20 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void insertDepartment(Department department) {
         if (department.getDepartment_name() == null || department.getDepartment_name().equals("")) throw new RuntimeException("科室名称不能为空");
-        int data = departmentMapper.insertDepartment(department);
-        if (data != 1) throw new RuntimeException("插入数据失败");
+        int result = departmentMapper.insertDepartment(department);
+        if (result != 1) throw new RuntimeException("插入数据失败");
     }
 
     @Override
     public void deleteDepartment(Integer department_id) {
-        int data = departmentMapper.deleteDepartment(department_id);
-        if (data != 1) throw new RuntimeException("删除数据失败");
+        int result = departmentMapper.deleteDepartment(department_id);
+        if (result != 1) throw new RuntimeException("删除数据失败");
     }
 
     @Override
     public void updateDepartment(Department department) {
         if (department.getDepartment_name() == null || department.getDepartment_name().equals("")) throw new RuntimeException("科室名称不能为空");
-        int data = departmentMapper.updateDepartment(department);
-        if (data != 1) throw new RuntimeException("更新数据失败");
+        int result = departmentMapper.updateDepartment(department);
+        if (result != 1) throw new RuntimeException("更新数据失败");
     }
 }
