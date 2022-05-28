@@ -1,7 +1,9 @@
 package com.api.hospital.service.impl;
 
 import com.api.hospital.mapper.ArticleMapper;
+import com.api.hospital.mapper.HealthMapper;
 import com.api.hospital.model.entity.Article;
+import com.api.hospital.model.entity.Health;
 import com.api.hospital.service.intf.AritcleService;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,10 @@ import java.util.List;
 public class AritcleServiceImpl implements AritcleService {
 
     @Resource
-    ArticleMapper articleMapper;
+    private ArticleMapper articleMapper;
+
+    @Resource
+    private HealthMapper healthMapper;
 
     @Override
     public Article getArticleById(int article_id) {
@@ -52,5 +57,16 @@ public class AritcleServiceImpl implements AritcleService {
     @Override
     public List<Article> getArticlesByType(String article_type) {
         return articleMapper.getArticlesByType(article_type);
+    }
+
+    @Override
+    public List<Health> getHealth(int start, int end) {
+        List<Health> healths = healthMapper.getHealth(start, end);
+        if (healths.size() > 0) {
+            return healthMapper.getHealth(start, end);
+        }else {
+            throw new RuntimeException("没有数据了");
+        }
+
     }
 }

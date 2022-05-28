@@ -2,6 +2,7 @@ package com.api.hospital.service.intf;
 
 
 import com.api.hospital.model.entity.Article;
+import com.api.hospital.model.entity.Health;
 
 import java.util.List;
 
@@ -21,5 +22,6 @@ public interface AritcleService {
 
     List<Article> getArticlesByType(String article_type);
 
+    List<Health> getHealth(int start, int end);
 
 }
