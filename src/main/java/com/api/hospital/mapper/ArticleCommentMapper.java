@@ -21,7 +21,7 @@ public interface ArticleCommentMapper {
             "article_comment.comment_datetime,patient.patient_name,patient.patient_avatar from article_comment " +
             "left join patient on article_comment.patient_id = patient.patient_id where article_id = #{article_id} " +
             "order by comment_datetime desc")
-    List<CommentWithPatient> getCommentByArticleIdWithPatient(CommentWithPatient commentWithPatient);
+    List<CommentWithPatient> getCommentByArticleIdWithPatient(int article_id);
 
     @Options(useGeneratedKeys = true, keyProperty = "comment_id", keyColumn = "comment_id")
     @Insert("insert into article_comment(article_id, patient_id, comment_content, comment_datetime) " +
@@ -33,6 +33,9 @@ public interface ArticleCommentMapper {
 
     @Delete("delete from article_comment where comment_id = #{comment_id}")
     int deleteComment(int comment_id);
+
+    @Delete("delete from article_comment where article_id = #{article_id}")
+    int deleteCommentByArticleId(int article_id);
 
 
 }

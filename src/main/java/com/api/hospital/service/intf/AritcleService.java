@@ -26,4 +26,8 @@ public interface AritcleService {
 
     List<Health> getHealth(int start, int end);
 
+    void updateArticlePraise(int article_id);
+
+    void updateArticlePraiseCancel(int article_id);
+
 }

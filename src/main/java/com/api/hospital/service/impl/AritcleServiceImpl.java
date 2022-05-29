@@ -1,5 +1,6 @@
 package com.api.hospital.service.impl;
 
+import com.api.hospital.mapper.ArticleCommentMapper;
 import com.api.hospital.mapper.ArticleMapper;
 import com.api.hospital.model.entity.Article;
 import com.api.hospital.model.vo.Health;
@@ -15,28 +16,36 @@ public class AritcleServiceImpl implements AritcleService {
     @Resource
     private ArticleMapper articleMapper;
 
+    @Resource
+    private ArticleCommentMapper articleCommentMapper;
+
     @Override
     public Article getArticleById(int article_id) {
         Article data = articleMapper.getArticleById(article_id);
-        if (data != null) return data;
-        else throw new RuntimeException("没有找到对应的文章");
+        if (data != null) {
+            articleMapper.updateArticleViews(article_id);
+            data.setArticle_views(data.getArticle_views() + 1);
+            return data;
+        } else throw new RuntimeException("没有找到对应的文章");
     }
 
     @Override
     public void deleteArticleById(int article_id) {
         int result = articleMapper.deleteArticleById(article_id);
-        if (result != 1) throw new RuntimeException("删除失败");
+        if (result == 1) {
+            articleCommentMapper.deleteCommentByArticleId(article_id);
+        } else throw new RuntimeException("删除失败");
     }
 
     @Override
     public void updateArticleById(Article article) {
-        int result =  articleMapper.updateArticleById(article);
+        int result = articleMapper.updateArticleById(article);
         if (result != 1) throw new RuntimeException("更新失败");
     }
 
     @Override
     public void insertArticle(Article article) {
-        int result =  articleMapper.insertArticle(article);
+        int result = articleMapper.insertArticle(article);
         if (result != 1) throw new RuntimeException("插入失败");
     }
 
@@ -74,5 +83,17 @@ public class AritcleServiceImpl implements AritcleService {
         if (healths.size() > 0) return articleMapper.getHealth(start, end);
         else throw new RuntimeException("没有数据了");
 
+    }
+
+    @Override
+    public void updateArticlePraise(int article_id) {
+        int result = articleMapper.updateArticlePraise(article_id);
+        if (result != 1) throw new RuntimeException("文章点赞失败");
+    }
+
+    @Override
+    public void updateArticlePraiseCancel(int article_id) {
+        int result = articleMapper.updateArticlePraiseCancel(article_id);
+        if (result != 1) throw new RuntimeException("取消文章点赞失败");
     }
 }

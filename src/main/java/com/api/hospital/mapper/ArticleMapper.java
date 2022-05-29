@@ -40,8 +40,20 @@ public interface ArticleMapper {
             "doctor on article.doctor_id = doctor.doctor_id order by article.article_id desc limit #{start},#{end}")
     List<Health> getHealth(int start, int end);
 
-    //TODO:每次访问文章详情页后，阅读数+1
-    //TODO:发表评论后，评论数+1
-    //TODO:文章点赞后，点赞数+1
+    //每次访问文章详情页后，阅读数+1
+    @Update("update article set article_views = article_views + 1 where article_id = #{article_id}")
+    int updateArticleViews(int article_id);
+    //发表评论后，评论数+1
+    @Update("update article set article_comments = article_comments + 1 where article_id = #{article_id}")
+    int updateArticleCommentsCount(int article_id);
+
+    @Update("update article set article_comments = article_comments - 1 where article_id = #{article_id} and article_comments > 0")
+    int updateArticleCommentsCountMinus(int article_id);
+    //文章点赞后，点赞数+1
+    @Update("update article set article_praise = article_praise + 1 where article_id = #{article_id}")
+    int updateArticlePraise(int article_id);
+    //取消文章点赞后，点赞数-1
+    @Update("update article set article_praise = article_praise - 1 where article_id = #{article_id} and article_praise > 0")
+    int updateArticlePraiseCancel(int article_id);
 
 }

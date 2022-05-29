@@ -12,11 +12,13 @@ public interface CommentService {
 
     ArticleComment getCommentById(int comment_id);
 
-    List<CommentWithPatient> getCommentByArticleIdWithPatient(CommentWithPatient commentWithPatient);
+    List<CommentWithPatient> getCommentByArticleIdWithPatient(int article_id);
 
     void insertComment(ArticleComment articleComment);
 
     void updateComment(ArticleComment articleComment);
 
     void deleteComment(int comment_id);
+
+
 }
