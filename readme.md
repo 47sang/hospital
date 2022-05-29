@@ -101,6 +101,21 @@ patient_id | 患者id | int(11) | NO   | FK | NULL    |  |
 comment_content | 评论内容 | varchar(255) | NO   |     | NULL    |             |
 comment_datetime | 评论时间 | datetime(8) | NO   |     | NULL    | CURRENT_TIMESTAMP |
 
+## 文章点赞表[praise]
+
+字段|注释|类型(长度)|允许为空|主键|默认值|自增|
+--|--|--|--|--|--|--|
+article_id | 文章id | int(11) | NO   |  | NULL    |  |
+patient_id | 患者id | int(11) | NO   |  | NULL    |  |
+
+## 文章收藏表[collect]
+
+字段|注释|类型(长度)|允许为空|主键|默认值|自增|
+--|--|--|--|--|--|--|
+collect_id | 收藏id | int(11) | NO   | PRI | NULL    | auto_increment |
+article_id | 文章id | int(11) | NO   |  | NULL    |  |
+patient_id | 患者id | int(11) | NO   |  | NULL    |  |
+
 ## 门诊缴费记录表[pay]
 
 字段|注释|类型(长度)|允许为空|主键|默认值|自增|
