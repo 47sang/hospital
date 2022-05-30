@@ -1,6 +1,60 @@
 复刻太和县医院API
 ===============
 
+# swagger接口文档
+
+本地运行后，自动部署接口文档访问地址：[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+# 功能实现
+
+小程序接口：
+
+```text
+|_WxHome：首页✔
+   |__demand：搜索（未实现）
+   |__demand：门诊挂号（未实现）
+   |__demand：在线问诊（未实现）
+   |__navs：顶部导航✔
+   |__headlines：最头条✔
+   |__banners：banner轮播图✔
+   |__general：综合服务✔
+   |__departments：科室导航✔
+   |__healthPush：健康推送✔
+|_WxHealth：健康圈✔
+   |__demand：搜索（未实现）
+   |__demand：问答社区（未实现）
+   |__demand：健康咨询（未实现）
+   |__health：文章列表✔
+|_WxDisease：慢病管理（未实现）
+   |__demand：患者信息（未实现）
+   |__demand：工具导航（未实现）
+   |__demand：慢病常识（未实现）
+   |__demand：体征监测（未实现）
+|_WxMine：我的（未实现）
+   |__demand：患者信息（未实现）
+   |__demand：账户信息、收藏、提问（未实现）
+   |__demand：功能按钮（未实现）
+   |__demand：门诊住院（未实现）
+   |__demand：其他服务（未实现）
+```
+
+后端功能接口：
+
+```text
+|_patient：患者信息（未实现）
+|_doctor：医生信息（未实现）
+|_department：科室部门管理✔
+|_clinic：科室门诊管理✔
+|_nav：导航管理✔
+|_article：文章管理✔
+|_article_comment：文章评论管理✔
+|_praise：文章点赞记录管理✔
+|_collect：个人文章收藏管理✔
+|_pay：支付记录（未实现）
+|_reservation：预约信息记录（未实现）
+```
+
+
 # 目录结构
 
 ```text
