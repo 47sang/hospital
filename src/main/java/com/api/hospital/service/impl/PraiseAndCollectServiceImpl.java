@@ -18,43 +18,53 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
 
     @Override
     public int isPraise(Praise praise) {
-        return praiseAndCollectMapper.isPraise(praise);
+        int result = praiseAndCollectMapper.isPraise(praise);
+        return result == 1 ? 1 : 0;
     }
 
     @Override
-    public int selectPraiseCount(Praise praise) {
-        return 0;
+    public int getPraiseCount(Praise praise) {
+        int result = praiseAndCollectMapper.getPraiseCount(praise);
+        return Math.max(result, 0);
     }
 
     @Override
-    public int insertPraise(Praise praise) {
-        return 0;
+    public void insertPraise(Praise praise) {
+        int result = praiseAndCollectMapper.insertPraise(praise);
+        if (result != 1) throw new RuntimeException("插入失败");
     }
 
     @Override
-    public int deletePraise(Praise praise) {
-        return 0;
+    public void deletePraise(Praise praise) {
+        int result = praiseAndCollectMapper.deletePraise(praise);
+        if (result != 1) throw new RuntimeException("删除失败");
     }
 
     @Override
     public int deletePraiseByArticleId(int article_id) {
-        return 0;
+        return praiseAndCollectMapper.deletePraiseByArticleId(article_id);
     }
 
     @Override
     public int isCollect(Collect collect) {
-        return 0;
+        int result = praiseAndCollectMapper.isCollect(collect);
+        return result == 1 ? 1 : 0;
     }
 
     @Override
     public int getCollectCount(int patient_id) {
-        return 0;
+        int result = praiseAndCollectMapper.getCollectCount(patient_id);
+        return Math.max(result, 0);
     }
 
     @Override
     public List<MyCollect> getCollectByPatientId(int patient_id) {
-        return null;
+        List<MyCollect> data = praiseAndCollectMapper.getCollectByPatientId(patient_id);
+        if (data.size() > 0) return data;
+        else throw new RuntimeException("无数据");
+
     }
+
 
     @Override
     public int insertCollect(Collect collect) {

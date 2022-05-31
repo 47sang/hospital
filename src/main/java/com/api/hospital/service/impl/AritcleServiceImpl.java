@@ -32,9 +32,8 @@ public class AritcleServiceImpl implements AritcleService {
     @Override
     public void deleteArticleById(int article_id) {
         int result = articleMapper.deleteArticleById(article_id);
-        if (result == 1) {
-            articleCommentMapper.deleteCommentByArticleId(article_id);
-        } else throw new RuntimeException("删除失败");
+        if (result == 1) articleCommentMapper.deleteCommentByArticleId(article_id);
+        else throw new RuntimeException("删除失败");
     }
 
     @Override

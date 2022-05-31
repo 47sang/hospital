@@ -9,11 +9,11 @@ import java.util.List;
 public interface PraiseAndCollectService {
     int isPraise(Praise praise);
 
-    int selectPraiseCount(Praise praise);
+    int getPraiseCount(Praise praise);
 
-    int insertPraise(Praise praise);
+    void insertPraise(Praise praise);
 
-    int deletePraise(Praise praise);
+    void deletePraise(Praise praise);
 
     int deletePraiseByArticleId(int article_id);
 
