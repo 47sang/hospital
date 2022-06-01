@@ -5,18 +5,18 @@ import com.api.hospital.mapper.ArticleMapper;
 import com.api.hospital.model.entity.Article;
 import com.api.hospital.model.vo.Health;
 import com.api.hospital.service.intf.AritcleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class AritcleServiceImpl implements AritcleService {
 
-    @Resource
+    @Autowired
     private ArticleMapper articleMapper;
 
-    @Resource
+    @Autowired
     private ArticleCommentMapper articleCommentMapper;
 
     @Override

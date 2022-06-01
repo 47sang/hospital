@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ClinicServiceImpl implements ClinicService {
 
-    @Resource
+    @Autowired
     private ClinicMapper clinicMapper;
 
     @Override

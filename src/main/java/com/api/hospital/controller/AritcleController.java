@@ -5,9 +5,9 @@ import com.api.hospital.model.entity.Article;
 import com.api.hospital.service.intf.AritcleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping(value = "/article")
 @RestController
 public class AritcleController {
-    @Resource
+    @Autowired
     private AritcleService aritcleService;
 
     @ApiOperation(value = "分页获取文章列表")

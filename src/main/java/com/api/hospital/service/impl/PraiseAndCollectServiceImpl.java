@@ -65,14 +65,15 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
 
     }
 
-
     @Override
-    public int insertCollect(Collect collect) {
-        return 0;
+    public void insertCollect(Collect collect) {
+        int result = praiseAndCollectMapper.insertCollect(collect);
+        if (result != 1) throw new RuntimeException("插入失败");
     }
 
     @Override
-    public int deleteCollect(Collect collect) {
-        return 0;
+    public void deleteCollect(Collect collect) {
+        int result = praiseAndCollectMapper.deleteCollect(collect);
+        if (result != 1) throw new RuntimeException("删除失败");
     }
 }

@@ -10,32 +10,33 @@ import com.api.hospital.service.intf.NavService;
 import com.api.hospital.utils.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("ALL")
 @Api(tags = "微信小程序接口")
 @RestController
 public class HomeController {
 
-    @Resource
+    @Autowired
     private AritcleService aritcleService;
 
-    @Resource
+    @Autowired
     private NavService navService;
 
-    @Resource
+    @Autowired
     private DepartmentService departmentService;
 
-    @Resource
+    @Autowired
     RedisTemplate<String, Object> redisTemplate;
 
-    @Resource
+    @Autowired
     RedisUtils redisUtils;
 
     @ApiOperation(value = "首页数据")
@@ -87,9 +88,7 @@ public class HomeController {
                 List<Health> data = aritcleService.getHealth(page, 10);
                 wxHealth.setHealth(data);
                 responseInfo.setData(wxHealth);
-
                 //存入redis并设置过期时间
-//                redisTemplate.opsForValue().set("health" + page, wxHealth);
                 redisUtils.set("health" + page, wxHealth);
                 redisTemplate.expire("health" + page, 5, TimeUnit.MINUTES);
             } catch (Exception e) {

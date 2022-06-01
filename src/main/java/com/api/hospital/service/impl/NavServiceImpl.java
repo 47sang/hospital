@@ -4,18 +4,18 @@ import com.api.hospital.mapper.NavMapper;
 import com.api.hospital.model.entity.Nav;
 import com.api.hospital.service.intf.NavService;
 import com.api.hospital.utils.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
 @Service
 public class NavServiceImpl implements NavService {
 
-    @Resource
+    @Autowired
     NavMapper navMapper;
 
     @Value("${file.path}")

@@ -23,7 +23,7 @@ public interface PraiseAndCollectService {
 
     List<MyCollect> getCollectByPatientId(int patient_id);
 
-    int insertCollect(Collect collect);
+    void insertCollect(Collect collect);
 
-    int deleteCollect(Collect collect);
+    void deleteCollect(Collect collect);
 }

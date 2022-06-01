@@ -5,18 +5,18 @@ import com.api.hospital.mapper.ArticleMapper;
 import com.api.hospital.model.entity.ArticleComment;
 import com.api.hospital.model.entity.CommentWithPatient;
 import com.api.hospital.service.intf.CommentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    @Resource
+    @Autowired
     private ArticleCommentMapper articleCommentMapper;
 
-    @Resource
+    @Autowired
     private ArticleMapper articleMapper;
 
     @Override

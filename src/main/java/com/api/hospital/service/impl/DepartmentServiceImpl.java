@@ -3,14 +3,14 @@ package com.api.hospital.service.impl;
 import com.api.hospital.mapper.DepartmentMapper;
 import com.api.hospital.model.entity.Department;
 import com.api.hospital.service.intf.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    @Resource
+    @Autowired
     DepartmentMapper departmentMapper;
 
     @Override
