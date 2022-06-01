@@ -5,6 +5,15 @@
 
 本地运行后，自动部署接口文档访问地址：[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
+# 准备做的事情
+
+- 就诊卡余额功能，缴费充值后，查询余额，消费了项目，对应减去相应的金额。
+  需要对应的在设计一个消费记录表，记录每次消费的项目，金额，时间，消费后的余额。
+  
+- 我的问诊功能没有实现，具体需求不祥，暂时不做
+
+- 搜索功能实现，搜索医生，科室。搜索结果可以按照科室，医生，排序。
+
 # 功能实现
 
 小程序接口：
@@ -32,9 +41,26 @@
    |__demand：体征监测（未实现）
 |_WxMine：我的（未实现）
    |__demand：患者信息（未实现）
-   |__demand：账户信息、收藏、提问（未实现）
+      |__demand：余额（未实现）
+      |__demand：关注收藏（未实现）
+      |__demand：我的提问（未实现）
    |__demand：功能按钮（未实现）
+      |__demand：我的预约（未实现）
+      |__demand：我的问诊（不实现）
+      |__demand：药品订单（未实现）
    |__demand：门诊住院（未实现）
+      |__demand：就诊人管理（未实现）
+      |__demand：门诊缴费记录（未实现）
+      |__demand：门诊充值记录（未实现）
+      |__demand：住院预交记录（未实现）
+      |__demand：护理预约订单记录（未实现）
+      |__demand：转诊记录（未实现）
+      |__demand：会诊记录（未实现）
+      |__demand：病案预约记录（未实现）
+      |__demand：自助开单记录（未实现）
+      |__demand：我的随访（未实现）
+      |__demand：健康宣教（未实现）
+      |__demand：疫苗预约记录（未实现）
    |__demand：其他服务（未实现）
 ```
 
@@ -51,7 +77,7 @@
 |_praise：文章点赞记录管理✔
 |_collect：个人文章收藏管理✔
 |_pay：缴费记录✔
-|_reservation：预约信息记录（未实现）
+|_reservation：预约信息记录✔
 ```
 
 
@@ -185,8 +211,10 @@ patient_id | 缴费患者id | int(11) | NO   |   FK  | NULL    |             |
 
 字段|注释|类型(长度)|允许为空|主键|默认值|自增|
 --|--|--|--|--|--|--|
+reservation_id | 预约id | int(11) | NO   | PRI | NULL    | auto_increment |
 patient_id | 患者id | int(11) | NO   | FK | NULL    |  |
 doctor_id | 医生id | int(11) | NO   |  FK| NULL    |  |
 department_id | 科室编号 | int(11) | NO   | FK | NULL    |  |
 clinic_id | 门诊编号 | int(11) | NO   | FK | NULL    |  |
 datetime | 预约时间 | datetime(0) | NO   |  | NULL    |  |
+serial_number | 预约序号 | int(11) | NO   |  | NULL    |  |
