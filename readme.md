@@ -41,8 +41,8 @@
 后端功能接口：
 
 ```text
-|_patient：患者信息（未实现）
-|_doctor：医生信息（未实现）
+|_patient：患者信息✔
+|_doctor：医生信息✔
 |_department：科室部门管理✔
 |_clinic：科室门诊管理✔
 |_nav：导航管理✔
@@ -50,7 +50,7 @@
 |_article_comment：文章评论管理✔
 |_praise：文章点赞记录管理✔
 |_collect：个人文章收藏管理✔
-|_pay：支付记录（未实现）
+|_pay：缴费记录✔
 |_reservation：预约信息记录（未实现）
 ```
 

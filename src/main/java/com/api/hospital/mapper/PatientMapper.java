@@ -11,6 +11,7 @@ public interface PatientMapper {
      * @param patient 患者对象
      * @return int 1成功 0失败
      */
+    @Options(useGeneratedKeys = true, keyProperty = "patient_id", keyColumn = "patient_id")
     @Insert("insert into patient(patient_name,patient_card_id,patient_born_date,patient_sex,patient_phone,patient_medical_card,patient_avatar) " +
             "values(#{patient_name},#{patient_card_id},#{patient_born_date},#{patient_sex},#{patient_phone},#{patient_medical_card},#{patient_avatar})")
     int insertPatient(Patient patient);
