@@ -1,5 +1,6 @@
 package com.api.hospital.service.impl;
 
+import com.api.hospital.constant.ExceptionConstants;
 import com.api.hospital.mapper.ArticleCommentMapper;
 import com.api.hospital.mapper.ArticleMapper;
 import com.api.hospital.model.entity.Article;
@@ -26,7 +27,7 @@ public class AritcleServiceImpl implements AritcleService {
             articleMapper.updateArticleViews(article_id);
             data.setArticle_views(data.getArticle_views() + 1);
             return data;
-        } else throw new RuntimeException("没有找到对应的文章");
+        } else throw new RuntimeException(ExceptionConstants.DATA_READ_FAIL_MSG);
     }
 
     @Override
