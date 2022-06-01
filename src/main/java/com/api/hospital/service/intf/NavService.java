@@ -9,11 +9,11 @@ public interface NavService {
 
     String uploadIcon(MultipartFile file);
 
-    String addNav(Nav nav);
+    void addNav(Nav nav);
 
-    String deleteNav(Integer nav_id);
+    void deleteNav(Integer nav_id);
 
-    String updateNav(Nav nav);
+    void updateNav(Nav nav);
 
     Nav findNavById(Integer nav_id);
 

@@ -9,19 +9,19 @@ import java.util.List;
 public interface ClinicMapper {
     /**
      * 根据科室门诊id查询信息
-     * @param clinic_id 科室门诊id
+     * @param clinicId 科室门诊id
      * @return Clinic 科室门诊对象
      */
-    @Select("select * from clinic where clinic_id = #{clinic_id}")
-    Clinic getClinicById(int clinic_id);
+    @Select("select * from clinic where clinic_id = #{clinicId}")
+    Clinic getClinicById(int clinicId);
 
     /**
      * 根据科室部门id查询所有科室门诊信息
-     * @param department_id 科室部门id
+     * @param departmentId 科室部门id
      * @return List<Clinic> 科室门诊对象集合
      */
-    @Select("select * from clinic where department_id = #{department_id}")
-    List<Clinic> getClinicByDepartmentId(int department_id);
+    @Select("select * from clinic where department_id = #{departmentId}")
+    List<Clinic> getClinicByDepartmentId(int departmentId);
 
     /**
      * 获取所有科室门诊信息
@@ -48,9 +48,9 @@ public interface ClinicMapper {
 
     /**
      * 根据科室门诊id删除一条科室门诊信息
-     * @param clinic_id 科室门诊id
+     * @param clinicId 科室门诊id
      * @return int 1成功 0失败
      */
-    @Delete("delete from clinic where clinic_id = #{clinic_id}")
-    int deleteClinic(int clinic_id);
+    @Delete("delete from clinic where clinic_id = #{clinicId}")
+    int deleteClinic(int clinicId);
 }

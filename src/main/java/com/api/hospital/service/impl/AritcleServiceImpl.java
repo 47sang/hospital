@@ -27,73 +27,101 @@ public class AritcleServiceImpl implements AritcleService {
             articleMapper.updateArticleViews(article_id);
             data.setArticle_views(data.getArticle_views() + 1);
             return data;
-        } else throw new RuntimeException(ExceptionConstants.DATA_READ_FAIL_MSG);
+        } else {
+            throw new RuntimeException(ExceptionConstants.DATA_READ_FAIL_MSG);
+        }
     }
 
     @Override
     public void deleteArticleById(int article_id) {
         int result = articleMapper.deleteArticleById(article_id);
-        if (result == 1) articleCommentMapper.deleteCommentByArticleId(article_id);
-        else throw new RuntimeException("删除失败");
+        if (result == 1) {
+            articleCommentMapper.deleteCommentByArticleId(article_id);
+        } else {
+            throw new RuntimeException("删除失败");
+        }
     }
 
     @Override
     public void updateArticleById(Article article) {
         int result = articleMapper.updateArticleById(article);
-        if (result != 1) throw new RuntimeException("更新失败");
+        if (result != 1) {
+            throw new RuntimeException("更新失败");
+        }
     }
 
     @Override
     public void insertArticle(Article article) {
         int result = articleMapper.insertArticle(article);
-        if (result != 1) throw new RuntimeException("插入失败");
+        if (result != 1) {
+            throw new RuntimeException("插入失败");
+        }
     }
 
     @Override
     public List<Article> getArticles() {
         List<Article> data = articleMapper.getArticles();
-        if (data.size() > 0) return data;
-        else throw new RuntimeException("没有数据了");
+        if (data.size() > 0) {
+            return data;
+        } else {
+            throw new RuntimeException("没有数据了");
+        }
     }
 
     @Override
     public List<Article> getArticlesByPage(int start, int end) {
         List<Article> data = articleMapper.getArticlesByPage(start, end);
-        if (data.size() > 0) return data;
-        else throw new RuntimeException("没有数据了");
+        if (data.size() > 0) {
+            return data;
+        } else {
+            throw new RuntimeException("没有数据了");
+        }
     }
 
     @Override
     public List<Article> getArticlesByPaging(String article_type, int start, int end) {
         List<Article> data = articleMapper.getArticlesByPaging(article_type, start, end);
-        if (data.size() > 0) return data;
-        else throw new RuntimeException("没有数据了");
+        if (data.size() > 0) {
+            return data;
+        } else {
+            throw new RuntimeException("没有数据了");
+        }
     }
 
     @Override
     public List<Article> getArticlesByType(String article_type) {
         List<Article> data = articleMapper.getArticlesByType(article_type);
-        if (data.size() > 0) return data;
-        else throw new RuntimeException("没有数据了");
+        if (data.size() > 0) {
+            return data;
+        } else {
+            throw new RuntimeException("没有数据了");
+        }
     }
 
     @Override
     public List<Health> getHealth(int start, int end) {
         List<Health> healths = articleMapper.getHealth(start, end);
-        if (healths.size() > 0) return articleMapper.getHealth(start, end);
-        else throw new RuntimeException("没有数据了");
+        if (healths.size() > 0) {
+            return articleMapper.getHealth(start, end);
+        } else {
+            throw new RuntimeException("没有数据了");
+        }
 
     }
 
     @Override
     public void updateArticlePraise(int article_id) {
         int result = articleMapper.updateArticlePraise(article_id);
-        if (result != 1) throw new RuntimeException("文章点赞失败");
+        if (result != 1) {
+            throw new RuntimeException("文章点赞失败");
+        }
     }
 
     @Override
     public void updateArticlePraiseCancel(int article_id) {
         int result = articleMapper.updateArticlePraiseCancel(article_id);
-        if (result != 1) throw new RuntimeException("取消文章点赞失败");
+        if (result != 1) {
+            throw new RuntimeException("取消文章点赞失败");
+        }
     }
 }

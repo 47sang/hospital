@@ -31,13 +31,17 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
     @Override
     public void insertPraise(Praise praise) {
         int result = praiseAndCollectMapper.insertPraise(praise);
-        if (result != 1) throw new RuntimeException("插入失败");
+        if (result != 1) {
+            throw new RuntimeException("插入失败");
+        }
     }
 
     @Override
     public void deletePraise(Praise praise) {
         int result = praiseAndCollectMapper.deletePraise(praise);
-        if (result != 1) throw new RuntimeException("删除失败");
+        if (result != 1) {
+            throw new RuntimeException("删除失败");
+        }
     }
 
     @Override
@@ -60,20 +64,27 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
     @Override
     public List<MyCollect> getCollectByPatientId(int patient_id) {
         List<MyCollect> data = praiseAndCollectMapper.getCollectByPatientId(patient_id);
-        if (data.size() > 0) return data;
-        else throw new RuntimeException("无数据");
+        if (data.size() > 0) {
+            return data;
+        } else {
+            throw new RuntimeException("无数据");
+        }
 
     }
 
     @Override
     public void insertCollect(Collect collect) {
         int result = praiseAndCollectMapper.insertCollect(collect);
-        if (result != 1) throw new RuntimeException("插入失败");
+        if (result != 1) {
+            throw new RuntimeException("插入失败");
+        }
     }
 
     @Override
     public void deleteCollect(Collect collect) {
         int result = praiseAndCollectMapper.deleteCollect(collect);
-        if (result != 1) throw new RuntimeException("删除失败");
+        if (result != 1) {
+            throw new RuntimeException("删除失败");
+        }
     }
 }

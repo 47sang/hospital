@@ -20,29 +20,38 @@ public class CommentServiceImpl implements CommentService {
     private ArticleMapper articleMapper;
 
     @Override
-    public int getCommentCount(int article_id) {
-        return articleCommentMapper.getCommentCount(article_id);
+    public int getCommentCount(int articleId) {
+        return articleCommentMapper.getCommentCount(articleId);
     }
 
     @Override
-    public List<ArticleComment> getCommentByArticleId(int article_id) {
-        List<ArticleComment> data = articleCommentMapper.getCommentByArticleId(article_id);
-        if (data.size() > 0) return data;
-        else throw new RuntimeException("此文章没有评论");
+    public List<ArticleComment> getCommentByArticleId(int articleId) {
+        List<ArticleComment> data = articleCommentMapper.getCommentByArticleId(articleId);
+        if (data.size() > 0) {
+            return data;
+        } else {
+            throw new RuntimeException("此文章没有评论");
+        }
     }
 
     @Override
-    public ArticleComment getCommentById(int comment_id) {
-        ArticleComment data = articleCommentMapper.getCommentById(comment_id);
-        if (data != null) return data;
-        else throw new RuntimeException("评论不存在");
+    public ArticleComment getCommentById(int commentId) {
+        ArticleComment data = articleCommentMapper.getCommentById(commentId);
+        if (data != null) {
+            return data;
+        } else {
+            throw new RuntimeException("评论不存在");
+        }
     }
 
     @Override
-    public List<CommentWithPatient> getCommentByArticleIdWithPatient(int article_id) {
-        List<CommentWithPatient> data = articleCommentMapper.getCommentByArticleIdWithPatient(article_id);
-        if (data.size() > 0) return data;
-        else throw new RuntimeException("此文章没有评论");
+    public List<CommentWithPatient> getCommentByArticleIdWithPatient(int articleId) {
+        List<CommentWithPatient> data = articleCommentMapper.getCommentByArticleIdWithPatient(articleId);
+        if (data.size() > 0) {
+            return data;
+        } else {
+            throw new RuntimeException("此文章没有评论");
+        }
     }
 
     @Override
@@ -50,21 +59,27 @@ public class CommentServiceImpl implements CommentService {
         int result = articleCommentMapper.insertComment(articleComment);
         if (result == 1) {
             articleMapper.updateArticleCommentsCount(articleComment.getArticle_id());
-        } else throw new RuntimeException("发表评论失败");
+        } else {
+            throw new RuntimeException("发表评论失败");
+        }
     }
 
     @Override
     public void updateComment(ArticleComment articleComment) {
         int result = articleCommentMapper.updateComment(articleComment);
-        if (result != 1) throw new RuntimeException("更新评论失败");
+        if (result != 1) {
+            throw new RuntimeException("更新评论失败");
+        }
     }
 
     @Override
-    public void deleteComment(int comment_id) {
-        int result = articleCommentMapper.deleteComment(comment_id);
+    public void deleteComment(int commentId) {
+        int result = articleCommentMapper.deleteComment(commentId);
         if (result == 1) {
-            articleMapper.updateArticleCommentsCountMinus(comment_id);
-        } else throw new RuntimeException("删除评论失败");
+            articleMapper.updateArticleCommentsCountMinus(commentId);
+        } else {
+            throw new RuntimeException("删除评论失败");
+        }
     }
 
 }
