@@ -2,11 +2,16 @@ package com.api.hospital.controller;
 
 import com.api.hospital.model.dto.ResponseInfo;
 import com.api.hospital.model.entity.Article;
+import com.api.hospital.model.entity.ArticleComment;
+import com.api.hospital.model.entity.Doctor;
 import com.api.hospital.service.intf.AritcleService;
+import com.api.hospital.service.intf.CommentService;
+import com.api.hospital.service.intf.DoctorService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +23,12 @@ import java.util.Map;
 public class AritcleController {
     @Autowired
     private AritcleService aritcleService;
+
+    @Autowired
+    private CommentService commentService;
+
+    @Autowired
+    private DoctorService doctorService;
 
     @ApiOperation(value = "分页获取文章列表")
     @GetMapping({"/list/{page}", "/list"})
@@ -58,9 +69,15 @@ public class AritcleController {
     @GetMapping("/{article_id}")
     public ResponseInfo articleById(@PathVariable("article_id") int article_id) {
         ResponseInfo responseInfo = new ResponseInfo();
+        Map<String, Object> data = new HashMap<>();
         try {
             Article article = aritcleService.getArticleById(article_id);
-            responseInfo.setData(article);
+            List<ArticleComment> comment = commentService.getCommentByArticleId(article_id);
+            Doctor doctor = doctorService.getDoctorById(article.getDoctor_id());
+            data.put("article", article);
+            data.put("comment", comment);
+            data.put("doctor", doctor);
+            responseInfo.setData(data);
         } catch (Exception e) {
             responseInfo.setCode(400);
             responseInfo.setMessage(e.getMessage());
@@ -83,10 +100,14 @@ public class AritcleController {
 
     @ApiOperation(value = "添加文章")
     @PostMapping("")
-    public ResponseInfo insertArticle(Article article) {
+    public ResponseInfo insertArticle(Article article,@RequestParam(value = "file", required = false) MultipartFile file) {
         ResponseInfo responseInfo = new ResponseInfo();
         try {
-            aritcleService.insertArticle(article);
+            if (file == null) {
+                aritcleService.insertArticle(article);
+            }else {
+                aritcleService.insertArticle(article,file);
+            }
             responseInfo.setData(article);
         } catch (Exception e) {
             responseInfo.setCode(501);

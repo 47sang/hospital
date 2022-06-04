@@ -1,6 +1,8 @@
 package com.api.hospital.utils;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.*;
 import java.util.*;
 
@@ -8,6 +10,7 @@ import java.util.*;
  * 文件处理工具类
  */
 public class FileUtils {
+
 
     /**
      * 功　能: 创建文件夹
@@ -17,10 +20,36 @@ public class FileUtils {
      */
     public static boolean makedir(String path) {
         File file = new File(path);
-        if (!file.exists())
+        if (!file.exists()) {
             return file.mkdirs();
-        else
+        } else {
             return true;
+        }
+    }
+
+    /**
+     * 上传图片
+     * @param file       图片文件
+     * @param uploadPath 图片保存的路径
+     * @return String newFileName 文件名称
+     */
+    public String uploadImg(MultipartFile file, String uploadPath) {
+        // 获取文件名
+        String fileName = file.getOriginalFilename();
+        //后缀名：文件格式
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        //获取当前时间戳
+        String time = String.valueOf(System.currentTimeMillis());
+        //新文件名
+        String newFileName = time + suffixName;
+        try {
+            //保存文件
+            SaveFileFromInputStream(file.getInputStream(), uploadPath, newFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("文件上传失败");
+        }
+        return newFileName;
     }
 
     /**
@@ -39,7 +68,7 @@ public class FileUtils {
             flag = file.mkdirs();
         }
         if (flag) {
-            FileOutputStream fs = new FileOutputStream(new File(path + filename));
+            FileOutputStream fs = new FileOutputStream(path + filename);
             byte[] buffer = new byte[1024 * 1024];
             int byteread = 0;
             while ((byteread = stream.read(buffer)) != -1) {
@@ -146,8 +175,9 @@ public class FileUtils {
         } else {
             try {
                 File fileFolder = f.getParentFile();
-                if (!fileFolder.exists())
+                if (!fileFolder.exists()) {
                     fileFolder.mkdirs();
+                }
                 f.createNewFile();
             } catch (IOException ie) {
                 System.out.println("文件" + fileName + "创建失败：" + ie.getMessage());
@@ -192,8 +222,9 @@ public class FileUtils {
      * @file:File 目录
      */
     public static void delFileOrFolder(String fileName) {
-        if (!exists(fileName))
+        if (!exists(fileName)) {
             return;
+        }
         File file = new File(fileName);
         delFileOrFolder(file);
     }
@@ -204,8 +235,9 @@ public class FileUtils {
      * @file:File 目录
      */
     public static void delFileOrFolder(File file) {
-        if (!file.exists())
+        if (!file.exists()) {
             return;
+        }
         if (file.isFile()) {
             file.delete();
         } else {
@@ -236,10 +268,11 @@ public class FileUtils {
         }
         HashMap map = new HashMap();
         InputStream is = null;
-        if (file.startsWith("file:"))
+        if (file.startsWith("file:")) {
             is = new FileInputStream(new File(file.substring(5)));
-        else
+        } else {
             is = FileUtils.class.getClassLoader().getResourceAsStream(file);
+        }
         Properties properties = new Properties();
         properties.load(is);
         Enumeration en = properties.propertyNames();

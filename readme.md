@@ -14,6 +14,8 @@
 
 - 搜索功能实现，搜索医生，科室。搜索结果可以按照科室，医生，排序。
 
+- 整个项目的异常报错重新写一下，现在的报错没有报错信息，没有报错类型，没有报错级别，没有报错时间，没有报错描述。
+
 # 功能实现
 
 小程序接口：
@@ -37,7 +39,7 @@
 |_WxDisease：慢病管理（未实现）
    |__demand：患者信息（未实现）
    |__demand：工具导航（未实现）
-   |__demand：慢病常识（未实现）
+   |__demand：慢病常识✔
    |__demand：体征监测（未实现）
 |_WxMine：我的（未实现）
    |__demand：患者信息（未实现）
@@ -169,6 +171,7 @@ doctor_id | 作者医生id | int(11) | NO   |  FK  | NULL    |             |
 article_praise | 赞数 | int(11) | YES   |    | 0    |             |
 article_views | 阅读数 | int(11) | YES   |    | 0    |             |
 article_comments | 评论数 | int(11) | YES   |    | 0    |             |
+article_pic | 文章图片 | varchar(255) | YES   |    | 0    |             |
 
 
 ## 健康圈文章评论表[article_comment]

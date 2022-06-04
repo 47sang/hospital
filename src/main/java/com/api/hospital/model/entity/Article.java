@@ -17,4 +17,5 @@ public class Article {
     private Integer article_views;
     private Integer article_comments;
     private String article_type;
+    private String article_pic;
 }

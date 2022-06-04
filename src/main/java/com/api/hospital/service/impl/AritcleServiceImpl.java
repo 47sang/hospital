@@ -6,8 +6,11 @@ import com.api.hospital.mapper.ArticleMapper;
 import com.api.hospital.model.entity.Article;
 import com.api.hospital.model.vo.Health;
 import com.api.hospital.service.intf.AritcleService;
+import com.api.hospital.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +22,9 @@ public class AritcleServiceImpl implements AritcleService {
 
     @Autowired
     private ArticleCommentMapper articleCommentMapper;
+
+    @Value("${file.path}")
+    String uploadPath;
 
     @Override
     public Article getArticleById(int article_id) {
@@ -50,8 +56,18 @@ public class AritcleServiceImpl implements AritcleService {
         }
     }
 
-    @Override
+     @Override
     public void insertArticle(Article article) {
+        int result = articleMapper.insertArticle(article);
+        if (result != 1) {
+            throw new RuntimeException("插入失败");
+        }
+    }
+
+    @Override
+    public void insertArticle(Article article, MultipartFile file) {
+        String img = new FileUtils().uploadImg(file,uploadPath);
+        article.setArticle_pic(img);
         int result = articleMapper.insertArticle(article);
         if (result != 1) {
             throw new RuntimeException("插入失败");

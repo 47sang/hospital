@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,11 @@ public class MainController {
     @Value("${file.path}")
     private String uploadPath;
 
-
+    @GetMapping("/")
+    @ApiOperation(value = "首页默认显示内容")
+    public ResponseInfo index() {
+        return new ResponseInfo();
+    }
 
     @PostMapping(value = "/upload")
     @ApiOperation(value = "文件上传")

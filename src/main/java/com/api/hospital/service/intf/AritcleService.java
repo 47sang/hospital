@@ -3,6 +3,7 @@ package com.api.hospital.service.intf;
 
 import com.api.hospital.model.entity.Article;
 import com.api.hospital.model.vo.Health;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface AritcleService {
     void updateArticleById(Article article);
 
     void insertArticle(Article article);
+
+    void insertArticle(Article article, MultipartFile file);
 
     List<Article> getArticles();
 

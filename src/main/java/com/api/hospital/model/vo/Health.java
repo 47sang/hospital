@@ -11,6 +11,7 @@ public class Health {
     private String article_content;
     private Integer article_praise;
     private Integer article_views;
+    private String article_pic;
     private Integer doctor_id;
     private String doctor_name;
     private String doctor_avatar;

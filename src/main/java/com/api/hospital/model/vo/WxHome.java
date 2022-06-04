@@ -16,4 +16,7 @@ public class WxHome implements Serializable {
     private List<Nav> general;
     private List<Department> departments;
     private List<Article> healthPush;
+    /*
+
+     */
 }

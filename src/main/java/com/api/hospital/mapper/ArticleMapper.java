@@ -18,11 +18,11 @@ public interface ArticleMapper {
 
     /**
      * 根据文章id删除一条文章
-     * @param article_id 文章id
+     * @param articleId 文章id
      * @return int 1成功 0失败
      */
-    @Delete("delete from article where article_id = #{article_id}")
-    int deleteArticleById(int article_id);
+    @Delete("delete from article where article_id = #{articleId}")
+    int deleteArticleById(int articleId);
 
     /**
      * 根据文章id更新文章信息
@@ -30,7 +30,7 @@ public interface ArticleMapper {
      * @return int 1成功 0失败
      */
     @Update("update article set article_title = #{article_title}, article_keywords = #{article_keywords}," +
-            " article_content = #{article_content} where article_id = #{article_id}")
+            " article_content = #{article_content}, article_pic = #{article_pic} where article_id = #{article_id}")
     int updateArticleById(Article article);
 
     /**
@@ -39,8 +39,8 @@ public interface ArticleMapper {
      * @return int 1成功 0失败
      */
     @Options(useGeneratedKeys = true, keyProperty = "article_id", keyColumn = "article_id")
-    @Insert("insert into article( article_title, article_keywords, article_content, doctor_id,article_type) values(#{article_title}," +
-            " #{article_keywords}, #{article_content}, #{doctor_id},#{article_type})")
+    @Insert("insert into article( article_title, article_keywords, article_content, doctor_id,article_type,article_pic) values(#{article_title}," +
+            " #{article_keywords}, #{article_content}, #{doctor_id},#{article_type},#{article_pic})")
     int insertArticle(Article article);
 
     /**
