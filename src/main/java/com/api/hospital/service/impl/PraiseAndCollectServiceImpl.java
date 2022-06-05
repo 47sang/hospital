@@ -32,7 +32,7 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
     public void insertPraise(Praise praise) {
         int result = praiseAndCollectMapper.insertPraise(praise);
         if (result != 1) {
-            throw new RuntimeException("插入失败");
+            throw new RuntimeException("点赞失败");
         }
     }
 
@@ -40,7 +40,7 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
     public void deletePraise(Praise praise) {
         int result = praiseAndCollectMapper.deletePraise(praise);
         if (result != 1) {
-            throw new RuntimeException("删除失败");
+            throw new RuntimeException("删除点赞失败");
         }
     }
 
@@ -66,9 +66,8 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
         List<MyCollect> data = praiseAndCollectMapper.getCollectByPatientId(patient_id);
         if (data.size() > 0) {
             return data;
-        } else {
-            throw new RuntimeException("无数据");
         }
+        return null;
 
     }
 
@@ -76,7 +75,7 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
     public void insertCollect(Collect collect) {
         int result = praiseAndCollectMapper.insertCollect(collect);
         if (result != 1) {
-            throw new RuntimeException("插入失败");
+            throw new RuntimeException("收藏失败");
         }
     }
 
@@ -84,7 +83,7 @@ public class PraiseAndCollectServiceImpl implements PraiseAndCollectService {
     public void deleteCollect(Collect collect) {
         int result = praiseAndCollectMapper.deleteCollect(collect);
         if (result != 1) {
-            throw new RuntimeException("删除失败");
+            throw new RuntimeException("删除收藏失败");
         }
     }
 }

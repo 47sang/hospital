@@ -80,6 +80,7 @@
 |_collect：个人文章收藏管理✔
 |_pay：缴费记录✔
 |_reservation：预约信息记录✔
+|_patient：患者信息✔
 ```
 
 
@@ -163,7 +164,7 @@ nav_status | 导航状态 | enum('启用','禁用') | NO   |     | NULL    |    
 字段|注释|类型(长度)|允许为空|主键|默认值|自增|
 --|--|--|--|--|--|--|
 article_id | 文章id | int(11) | NO   | PRI | NULL    | auto_increment |
-article_datetime | 发布时间 | datetime(0) | NO   |     | NULL    | CURRENT_TIMESTAMP |
+article_datetime | 发布时间 | datetime(0) | NO   |     | CURRENT_TIMESTAMP   |  |
 article_title | 文章标题 | varchar(255) | NO   |     | NULL    |             |
 article_keywords | 文章关键词 | varchar(255) | NO   |     | NULL    |             |
 article_content | 文章内容 | mediumtext | NO   |     | NULL    |             |
@@ -182,7 +183,7 @@ comment_id | 评论id | int(11) | NO   | PRI | NULL    | auto_increment |
 article_id | 文章id | int(11) | NO   | FK | NULL    |  |
 patient_id | 患者id | int(11) | NO   | FK | NULL    |  |
 comment_content | 评论内容 | varchar(255) | NO   |     | NULL    |             |
-comment_datetime | 评论时间 | datetime(8) | NO   |     | NULL    | CURRENT_TIMESTAMP |
+comment_datetime | 评论时间 | datetime(8) | NO   |     | CURRENT_TIMESTAMP    |  |
 
 ## 文章点赞表[praise]
 

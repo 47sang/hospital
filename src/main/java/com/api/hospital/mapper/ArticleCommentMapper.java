@@ -49,8 +49,8 @@ public interface ArticleCommentMapper {
      * @return int 1成功 0失败
      */
     @Options(useGeneratedKeys = true, keyProperty = "comment_id", keyColumn = "comment_id")
-    @Insert("insert into article_comment(article_id, patient_id, comment_content, comment_datetime) " +
-            "values(#{article_id}, #{patient_id}, #{comment_content}, #{comment_datetime})")
+    @Insert("insert into article_comment(article_id, patient_id, comment_content) " +
+            "values(#{article_id}, #{patient_id}, #{comment_content})")
     int insertComment(ArticleComment articleComment);
 
     /**

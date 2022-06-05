@@ -1,12 +1,11 @@
 package com.api.hospital.controller;
 
 import com.api.hospital.model.dto.ResponseInfo;
-import com.api.hospital.model.entity.Article;
-import com.api.hospital.model.entity.ArticleComment;
-import com.api.hospital.model.entity.Doctor;
+import com.api.hospital.model.entity.*;
 import com.api.hospital.service.intf.AritcleService;
 import com.api.hospital.service.intf.CommentService;
 import com.api.hospital.service.intf.DoctorService;
+import com.api.hospital.service.intf.PraiseAndCollectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,9 @@ public class AritcleController {
 
     @Autowired
     private DoctorService doctorService;
+
+    @Autowired
+    private PraiseAndCollectService praiseAndCollectService;
 
     @ApiOperation(value = "分页获取文章列表")
     @GetMapping({"/list/{page}", "/list"})
@@ -100,13 +102,13 @@ public class AritcleController {
 
     @ApiOperation(value = "添加文章")
     @PostMapping("")
-    public ResponseInfo insertArticle(Article article,@RequestParam(value = "file", required = false) MultipartFile file) {
+    public ResponseInfo insertArticle(Article article, @RequestParam(value = "file", required = false) MultipartFile file) {
         ResponseInfo responseInfo = new ResponseInfo();
         try {
             if (file == null) {
                 aritcleService.insertArticle(article);
-            }else {
-                aritcleService.insertArticle(article,file);
+            } else {
+                aritcleService.insertArticle(article, file);
             }
             responseInfo.setData(article);
         } catch (Exception e) {
@@ -130,4 +132,68 @@ public class AritcleController {
         return responseInfo;
     }
 
+    @ApiOperation(value = "发布评论")
+    @PostMapping("/comment")
+    public ResponseInfo insertComment(ArticleComment comment) {
+        ResponseInfo responseInfo = new ResponseInfo();
+        try {
+            commentService.insertComment(comment);
+            responseInfo.setData(comment);
+        } catch (Exception e) {
+            responseInfo.setCode(501);
+            responseInfo.setMessage(e.getMessage());
+        }
+        return responseInfo;
+    }
+
+    @ApiOperation(value = "文章点赞")
+    @GetMapping("/praise")
+    public ResponseInfo likeArticle(@RequestParam("article_id") Praise praise) {
+        ResponseInfo responseInfo = new ResponseInfo();
+        try {
+            praiseAndCollectService.insertPraise(praise);
+        } catch (Exception e) {
+            responseInfo.setCode(501);
+            responseInfo.setMessage(e.getMessage());
+        }
+        return responseInfo;
+    }
+
+    @ApiOperation(value = "取消文章点赞")
+    @DeleteMapping("/praise")
+    public ResponseInfo unlikeArticle(@RequestParam("article_id") Praise praise) {
+        ResponseInfo responseInfo = new ResponseInfo();
+        try {
+            praiseAndCollectService.deletePraise(praise);
+        } catch (Exception e) {
+            responseInfo.setCode(501);
+            responseInfo.setMessage(e.getMessage());
+        }
+        return responseInfo;
+    }
+    @ApiOperation(value = "文章收藏")
+    @GetMapping("/collect")
+    public ResponseInfo collectArticle(@RequestParam("article_id") Collect collect) {
+        ResponseInfo responseInfo = new ResponseInfo();
+        try {
+            praiseAndCollectService.insertCollect(collect);
+        } catch (Exception e) {
+            responseInfo.setCode(501);
+            responseInfo.setMessage(e.getMessage());
+        }
+        return responseInfo;
+    }
+
+    @ApiOperation(value = "取消文章收藏")
+    @DeleteMapping("/collect")
+    public ResponseInfo uncollectArticle(@RequestParam("article_id") Collect collect) {
+        ResponseInfo responseInfo = new ResponseInfo();
+        try {
+            praiseAndCollectService.deleteCollect(collect);
+        } catch (Exception e) {
+            responseInfo.setCode(501);
+            responseInfo.setMessage(e.getMessage());
+        }
+        return responseInfo;
+    }
 }
