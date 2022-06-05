@@ -182,7 +182,7 @@ article_pic | 文章图片 | varchar(255) | YES   |    | 0    |             |
 comment_id | 评论id | int(11) | NO   | PRI | NULL    | auto_increment |
 article_id | 文章id | int(11) | NO   | FK | NULL    |  |
 patient_id | 患者id | int(11) | NO   | FK | NULL    |  |
-comment_content | 评论内容 | varchar(255) | NO   |     | NULL    |             |
+comment_content | 评论内容 | mediumtext | NO   |     | NULL    |             |
 comment_datetime | 评论时间 | datetime(8) | NO   |     | CURRENT_TIMESTAMP    |  |
 
 ## 文章点赞表[praise]

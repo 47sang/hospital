@@ -74,7 +74,7 @@ public class AritcleController {
         Map<String, Object> data = new HashMap<>();
         try {
             Article article = aritcleService.getArticleById(article_id);
-            List<ArticleComment> comment = commentService.getCommentByArticleId(article_id);
+            List<CommentWithPatient> comment = commentService.getCommentByArticleIdWithPatient(article_id);
             Doctor doctor = doctorService.getDoctorById(article.getDoctor_id());
             data.put("article", article);
             data.put("comment", comment);

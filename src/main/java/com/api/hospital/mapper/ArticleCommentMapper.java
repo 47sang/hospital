@@ -10,38 +10,38 @@ import java.util.List;
 public interface ArticleCommentMapper {
     /**
      * 根据文章id查询评论总数
-     * @param article_id 文章id
+     * @param articleId 文章id
      * @return int 文章评论数
      */
-    @Select("select count(*) from article_comment where article_id = #{article_id}")
-    int getCommentCount(int article_id);
+    @Select("select count(*) from article_comment where article_id = #{articleId}")
+    int getCommentCount(int articleId);
 
     /**
      * 根据文章id查询所有评论
-     * @param article_id 文章id
+     * @param articleId 文章id
      * @return List<ArticleComment> 文章评论列表对象
      */
-    @Select("select * from article_comment where article_id = #{article_id}")
-    List<ArticleComment> getCommentByArticleId(int article_id);
+    @Select("select * from article_comment where article_id = #{articleId} order by comment_datetime desc")
+    List<ArticleComment> getCommentByArticleId(int articleId);
 
     /**
      * 根据评论id查询评论
-     * @param comment_id 评论id
+     * @param commentId 评论id
      * @return ArticleComment 评论对象
      */
-    @Select("select * from article_comment where comment_id = #{comment_id}")
-    ArticleComment getCommentById(int comment_id);
+    @Select("select * from article_comment where comment_id = #{commentId}")
+    ArticleComment getCommentById(int commentId);
 
     /**
      * 根据文章id获取评论列表，并带有患者用户的信息
-     * @param article_id 文章id
+     * @param articleId 文章id
      * @return List<CommentWithPatient> 评论列表对象
      */
-    @Select("select article_comment.article_id,article_comment.patient_id,article_comment.comment_content," +
+    @Select("select article_comment.comment_id,article_comment.article_id,article_comment.patient_id,article_comment.comment_content," +
             "article_comment.comment_datetime,patient.patient_name,patient.patient_avatar from article_comment " +
-            "left join patient on article_comment.patient_id = patient.patient_id where article_id = #{article_id} " +
+            "left join patient on article_comment.patient_id = patient.patient_id where article_id = #{articleId} " +
             "order by comment_datetime desc")
-    List<CommentWithPatient> getCommentByArticleIdWithPatient(int article_id);
+    List<CommentWithPatient> getCommentByArticleIdWithPatient(int articleId);
 
     /**
      * 插入一条新评论
@@ -63,19 +63,19 @@ public interface ArticleCommentMapper {
 
     /**
      * 根据评论id删除一条评论
-     * @param comment_id 评论id
+     * @param commentId 评论id
      * @return int 1成功 0失败
      */
-    @Delete("delete from article_comment where comment_id = #{comment_id}")
-    int deleteComment(int comment_id);
+    @Delete("delete from article_comment where comment_id = #{commentId}")
+    int deleteComment(int commentId);
 
     /**
      * 根据文章id删除所有评论
-     * @param article_id 文章id
+     * @param articleId 文章id
      * @return int 被删除的条数
      */
-    @Delete("delete from article_comment where article_id = #{article_id}")
-    int deleteCommentByArticleId(int article_id);
+    @Delete("delete from article_comment where article_id = #{articleId}")
+    int deleteCommentByArticleId(int articleId);
 
 
 }

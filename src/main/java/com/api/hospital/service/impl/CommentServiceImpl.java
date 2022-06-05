@@ -50,7 +50,7 @@ public class CommentServiceImpl implements CommentService {
         if (data.size() > 0) {
             return data;
         } else {
-            throw new RuntimeException("此文章没有评论");
+            return null;
         }
     }
 
