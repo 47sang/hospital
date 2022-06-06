@@ -41,7 +41,7 @@ public class HomeController {
 
     @ApiOperation(value = "首页数据")
     @GetMapping("/home")
-    public ResponseInfo home() {
+    public ResponseInfo<WxHome> home() {
         ResponseInfo responseInfo = new ResponseInfo();
         WxHome wxHome = new WxHome();
         //从redis中获取数据
@@ -71,9 +71,10 @@ public class HomeController {
 
     @ApiOperation(value = "分页获取健康圈文章数据")
     @GetMapping({"/health/{page}", "/health"})
-    public ResponseInfo health(@PathVariable(value = "page", required = false) Integer page) {
+    public ResponseInfo<WxHealth> health(@PathVariable(value = "page", required = false) Integer page) {
         ResponseInfo responseInfo = new ResponseInfo();
         WxHealth wxHealth = new WxHealth();
+
         if (page == null) {
             page = 0;
         } else {

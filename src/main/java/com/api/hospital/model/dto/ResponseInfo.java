@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ResponseInfo {
+public class ResponseInfo<T> {
 
     private Integer code;
     private String message;

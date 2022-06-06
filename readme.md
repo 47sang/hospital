@@ -1,9 +1,13 @@
 复刻太和县医院API
 ===============
 
+# 微信小程序端
+
+- gitee地址：[https://gitee.com/g47/hospital_wx](https://gitee.com/g47/hospital_wx)
+
 # swagger接口文档
 
-本地运行后，自动部署接口文档访问地址：[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- 本地运行后，自动部署接口文档访问地址：[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 # 准备做的事情
 

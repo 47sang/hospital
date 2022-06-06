@@ -22,8 +22,8 @@ public class PatientController {
 
     @ApiOperation("插入患者信息")
     @PostMapping("")
-    public ResponseInfo insertPatient(Patient patient, @RequestParam(value = "file", required = false) MultipartFile file) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Patient> insertPatient(Patient patient, @RequestParam(value = "file", required = false) MultipartFile file) {
+        ResponseInfo<Patient> responseInfo = new ResponseInfo();
         try {
             if (file == null) {
                 patientService.insertPatient(patient);
@@ -40,8 +40,8 @@ public class PatientController {
 
     @ApiOperation("根据id获取患者信息")
     @GetMapping("/{patientId}")
-    public ResponseInfo getPatientById(@PathVariable(value = "patientId") int patientId) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, Patient>> getPatientById(@PathVariable(value = "patientId") int patientId) {
+        ResponseInfo<Map<String, Patient>> responseInfo = new ResponseInfo();
         Map<String, Patient> data = new HashMap<>();
         try {
             data.put("patient", patientService.getPatientById(patientId));
@@ -55,8 +55,8 @@ public class PatientController {
 
     @ApiOperation("更新患者信息")
     @PutMapping("")
-    public ResponseInfo updatePatient(Patient patient, @RequestParam(value = "file", required = false) MultipartFile file) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Patient> updatePatient(Patient patient, @RequestParam(value = "file", required = false) MultipartFile file) {
+        ResponseInfo<Patient> responseInfo = new ResponseInfo();
         try {
             if (file == null) {
                 patientService.updatePatient(patient);

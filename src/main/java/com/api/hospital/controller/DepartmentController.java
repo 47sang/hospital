@@ -22,8 +22,8 @@ public class DepartmentController {
 
     @ApiOperation(value = "查询科室列表")
     @GetMapping(value = "")
-    public ResponseInfo findDepartmentAll() {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, List<Department>>> findDepartmentAll() {
+        ResponseInfo<Map<String, List<Department>>> responseInfo = new ResponseInfo();
         Map<String, List<Department>> data = new HashMap<>();
         try {
             data.put("department", departmentService.findDepartmentAll());
@@ -37,8 +37,8 @@ public class DepartmentController {
 
     @ApiOperation(value = "根据ID查询科室列表")
     @GetMapping(value = "/{department_id}")
-    public ResponseInfo getDepartmentById(@PathVariable("department_id") Integer department_id) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, Department>> getDepartmentById(@PathVariable("department_id") Integer department_id) {
+        ResponseInfo<Map<String, Department>> responseInfo = new ResponseInfo();
         Map<String, Department> data = new HashMap<>();
         try {
             data.put("department", departmentService.getDepartmentById(department_id));
@@ -53,8 +53,8 @@ public class DepartmentController {
 
     @ApiOperation(value = "插入科室信息")
     @PostMapping(value = "")
-    public ResponseInfo insertDepartment(Department department) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, Department>> insertDepartment(Department department) {
+        ResponseInfo<Map<String, Department>> responseInfo = new ResponseInfo();
         Map<String, Department> data = new HashMap<>();
         try {
             departmentService.insertDepartment(department);
@@ -69,8 +69,8 @@ public class DepartmentController {
 
     @ApiOperation(value = "更新科室信息")
     @PutMapping(value = "")
-    public ResponseInfo updateDepartment(Department department) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, Department>> updateDepartment(Department department) {
+        ResponseInfo<Map<String, Department>> responseInfo = new ResponseInfo();
         Map<String, Department> data = new HashMap<>();
         try {
             departmentService.updateDepartment(department);

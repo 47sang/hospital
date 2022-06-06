@@ -26,8 +26,8 @@ public class NavController {
 
     @ApiOperation(value = "根据id获取导航")
     @GetMapping("{nav_id}")
-    public ResponseInfo findNavById(@PathVariable("nav_id") Integer nav_id) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, Nav>> findNavById(@PathVariable("nav_id") Integer nav_id) {
+        ResponseInfo<Map<String, Nav>> responseInfo = new ResponseInfo();
         Map<String, Nav> data = new HashMap<>();
         try {
             data.put("nav", navService.findNavById(nav_id));
@@ -41,8 +41,8 @@ public class NavController {
 
     @ApiOperation(value = "获取导航列表")
     @GetMapping("")
-    public ResponseInfo findNavAll() {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, List<Nav>>> findNavAll() {
+        ResponseInfo<Map<String, List<Nav>>> responseInfo = new ResponseInfo();
         Map<String, List<Nav>> data = new HashMap<>();
         try {
             data.put("nav", navService.findNavAll());
@@ -56,8 +56,8 @@ public class NavController {
 
     @ApiOperation(value = "新增导航")
     @PostMapping("")
-    public ResponseInfo newNav(Nav nav, @RequestParam(value = "file", required = false) MultipartFile file) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, Nav>> newNav(Nav nav, @RequestParam(value = "file", required = false) MultipartFile file) {
+        ResponseInfo<Map<String, Nav>> responseInfo = new ResponseInfo();
         Map<String, Nav> data = new HashMap<>();
         try {
             //判断是否上传了文件
@@ -71,15 +71,14 @@ public class NavController {
         } catch (Exception e) {
             responseInfo.setCode(501);
             responseInfo.setMessage(e.getMessage());
-//            log.error(String.valueOf(nav));
         }
         return responseInfo;
     }
 
     @ApiOperation(value = "修改导航")
     @PutMapping("")
-    public ResponseInfo updateNav(Nav nav) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, Nav>> updateNav(Nav nav) {
+        ResponseInfo<Map<String, Nav>> responseInfo = new ResponseInfo();
         Map<String, Nav> data = new HashMap<>();
         try {
             navService.updateNav(nav);
@@ -88,7 +87,6 @@ public class NavController {
         } catch (Exception e) {
             responseInfo.setCode(501);
             responseInfo.setMessage(e.getMessage());
-//            log.error(String.valueOf(nav));
         }
         return responseInfo;
     }

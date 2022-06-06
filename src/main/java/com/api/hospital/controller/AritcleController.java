@@ -34,8 +34,8 @@ public class AritcleController {
 
     @ApiOperation(value = "分页获取文章列表")
     @GetMapping({"/list/{page}", "/list"})
-    public ResponseInfo getAritcleBypage(@PathVariable(value = "page", required = false) Integer page) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, List<Article>>> getAritcleBypage(@PathVariable(value = "page", required = false) Integer page) {
+        ResponseInfo<Map<String, List<Article>>> responseInfo = new ResponseInfo();
         Map<String, List<Article>> data = new HashMap<>();
         if (page == null) {
             page = 0;
@@ -54,8 +54,8 @@ public class AritcleController {
 
     @ApiOperation(value = "根据分类获取列表")
     @GetMapping("")
-    public ResponseInfo getAritclesByType(@RequestParam("article_type") String article_type) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, List<Article>>> getAritclesByType(@RequestParam("article_type") String article_type) {
+        ResponseInfo<Map<String, List<Article>>> responseInfo = new ResponseInfo();
         Map<String, List<Article>> data = new HashMap<>();
         try {
             data.put("article", aritcleService.getArticlesByType(article_type));
@@ -69,8 +69,8 @@ public class AritcleController {
 
     @ApiOperation(value = "根据id查询文章")
     @GetMapping("/{article_id}")
-    public ResponseInfo articleById(@PathVariable("article_id") int article_id) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Map<String, Object>> articleById(@PathVariable("article_id") int article_id) {
+        ResponseInfo<Map<String, Object>> responseInfo = new ResponseInfo();
         Map<String, Object> data = new HashMap<>();
         try {
             Article article = aritcleService.getArticleById(article_id);
@@ -102,8 +102,8 @@ public class AritcleController {
 
     @ApiOperation(value = "添加文章")
     @PostMapping("")
-    public ResponseInfo insertArticle(Article article, @RequestParam(value = "file", required = false) MultipartFile file) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Article> insertArticle(Article article, @RequestParam(value = "file", required = false) MultipartFile file) {
+        ResponseInfo<Article> responseInfo = new ResponseInfo();
         try {
             if (file == null) {
                 aritcleService.insertArticle(article);
@@ -120,8 +120,8 @@ public class AritcleController {
 
     @ApiOperation(value = "更新文章")
     @PutMapping("")
-    public ResponseInfo updateArticle(Article article) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Article> updateArticle(Article article) {
+        ResponseInfo<Article> responseInfo = new ResponseInfo();
         try {
             aritcleService.updateArticleById(article);
             responseInfo.setData(article);
@@ -134,8 +134,8 @@ public class AritcleController {
 
     @ApiOperation(value = "发布评论")
     @PostMapping("/comment")
-    public ResponseInfo insertComment(ArticleComment comment) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<ArticleComment> insertComment(ArticleComment comment) {
+        ResponseInfo<ArticleComment> responseInfo = new ResponseInfo();
         try {
             commentService.insertComment(comment);
             responseInfo.setData(comment);
@@ -148,8 +148,8 @@ public class AritcleController {
 
     @ApiOperation(value = "文章点赞")
     @GetMapping("/praise")
-    public ResponseInfo likeArticle(@RequestParam("article_id") Praise praise) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Praise> likeArticle(@RequestParam("article_id") Praise praise) {
+        ResponseInfo<Praise> responseInfo = new ResponseInfo();
         try {
             praiseAndCollectService.insertPraise(praise);
         } catch (Exception e) {
@@ -161,8 +161,8 @@ public class AritcleController {
 
     @ApiOperation(value = "取消文章点赞")
     @DeleteMapping("/praise")
-    public ResponseInfo unlikeArticle(@RequestParam("article_id") Praise praise) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Praise> unlikeArticle(@RequestParam("article_id") Praise praise) {
+        ResponseInfo<Praise> responseInfo = new ResponseInfo();
         try {
             praiseAndCollectService.deletePraise(praise);
         } catch (Exception e) {
@@ -173,8 +173,8 @@ public class AritcleController {
     }
     @ApiOperation(value = "文章收藏")
     @GetMapping("/collect")
-    public ResponseInfo collectArticle(@RequestParam("article_id") Collect collect) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Collect> collectArticle(@RequestParam("article_id") Collect collect) {
+        ResponseInfo<Collect> responseInfo = new ResponseInfo();
         try {
             praiseAndCollectService.insertCollect(collect);
         } catch (Exception e) {
@@ -186,8 +186,8 @@ public class AritcleController {
 
     @ApiOperation(value = "取消文章收藏")
     @DeleteMapping("/collect")
-    public ResponseInfo uncollectArticle(@RequestParam("article_id") Collect collect) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<Collect> uncollectArticle(@RequestParam("article_id") Collect collect) {
+        ResponseInfo<Collect> responseInfo = new ResponseInfo();
         try {
             praiseAndCollectService.deleteCollect(collect);
         } catch (Exception e) {

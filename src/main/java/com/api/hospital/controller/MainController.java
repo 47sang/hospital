@@ -34,8 +34,8 @@ public class MainController {
 
     @PostMapping(value = "/upload")
     @ApiOperation(value = "文件上传")
-    public ResponseInfo upload(@RequestParam("file") MultipartFile file) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseInfo<String> upload(@RequestParam("file") MultipartFile file) {
+        ResponseInfo<String> responseInfo = new ResponseInfo();
         try {
             String fileName = navService.uploadIcon(file);
             responseInfo.setData(fileName);
